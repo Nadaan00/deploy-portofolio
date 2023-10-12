@@ -3,13 +3,17 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 
 from flask import Flask, render_template
-# from pymongo import MongoClient
+from pymongo import MongoClient
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-# client = MongoClient('mongodb+srv://???:sparta@cluster0.gaybq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-# db = client.dbsparta
+MONGODB_URI = os.environ.get("MONGODB_URI")
+DB_NAME =  os.environ.get("DB_NAME")
+
+client = MongoClient(MONGODB_URI)
+
+db = client[DB_NAME]
 
 app = Flask(__name__)
 
